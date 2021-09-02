@@ -22,12 +22,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ListView noticia = findViewById(R.id.lvNoticias);
-        String[] dados = new String[]{"teste1", "teste1"}
+//        ListView noticia = findViewById(R.id.lvNoticias);
+//        String[] dados = new String[]{"teste1", "teste1"}
+
+        ListView listaNoticias = (ListView) findViewById(R.id.lvNoticias);
+        ArrayList<String> noticias = preencherDados();
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, noticias);
+        listaNoticias.setAdapter(ArrayAdapter);
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_list_item_1,dados);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+//                (this, android.R.layout.simple_list_item_1,dados);
 
 
 
@@ -40,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(it);
             }
         });
+    }
+
+    private ArrayList<String> preencherDados(){
+        ArrayList<String> dados = new ArrayList<String>();
+        dados.add("Teste1");
+        dados.add("Teste2");
+        dados.add("Teste3");
+        dados.add("Teste4");
+        return dados;
     }
 
 

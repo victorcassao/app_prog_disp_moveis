@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6a7a5eda-abbb-4eae-9d3c-e950e770b5f1" name="Default Changelist" comment="" />
+    <list default="true" id="e097aeda-e532-434f-9e70-0de34e267325" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Noticiando/app/src/main/java/com/example/noticiando/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/Noticiando/app/src/main/java/com/example/noticiando/MainActivity.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,7 +16,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1xW3Gf4ONENYsHOELI13nzyFIyN" />
+  <component name="ProjectId" id="1xYxoJzWf4tndixVIt0LTemsgWN" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -21,17 +24,29 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="android.sdk.path" value="$USER_HOME$/Android/Sdk" />
+    <property name="settings.editor.selected.configurable" value="AndroidSdkUpdater" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6a7a5eda-abbb-4eae-9d3c-e950e770b5f1" name="Default Changelist" comment="" />
-      <created>1630456922723</created>
+      <changelist id="e097aeda-e532-434f-9e70-0de34e267325" name="Default Changelist" comment="" />
+      <created>1630546000951</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1630456922723</updated>
+      <updated>1630546000951</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
