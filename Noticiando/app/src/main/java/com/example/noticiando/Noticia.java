@@ -2,24 +2,30 @@ package com.example.noticiando;
 
 public class Noticia {
 
-    private String nome;
-    private String titulo;
+    private String autor;
+    private String conteudo;
     private String descricao;
+    private String dataPublicacao;
+    private String titulo;
     private String url;
+    private String urlToImage;
 
-    public Noticia(String nome, String titulo, String descricao, String url) {
-        this.nome = nome;
-        this.titulo = titulo;
+    public Noticia(String autor, String conteudo, String descricao, String dataPublicacao, String titulo, String url, String urlToImage) {
+        this.autor = autor;
+        this.conteudo = conteudo;
         this.descricao = descricao;
+        this.dataPublicacao = dataPublicacao;
+        this.titulo = titulo;
         this.url = url;
+        this.urlToImage = urlToImage;
     }
 
-    public String getNome() {
-        return nome;
+    public String getAutor() {
+        return autor;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
     public String getTitulo() {
@@ -44,5 +50,29 @@ public class Noticia {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getConteudo() {
+        return conteudo;
+    }
+
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
+    }
+
+    public String getDataPublicacao() {
+        return dataPublicacao;
+    }
+
+    public void setDataPublicacao(String dataPublicacao) {
+        this.dataPublicacao = dataPublicacao;
+    }
+
+    public String getUrlToImage() {
+        return urlToImage;
+    }
+
+    public void setUrlToImage(String urlToImage) {
+        this.urlToImage = urlToImage;
     }
 }

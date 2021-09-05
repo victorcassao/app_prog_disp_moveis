@@ -27,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
 
         for(int i = 0; i < noticias.length(); i++){
             JSONObject obj_temp = noticias.getJSONObject(i);
-            Noticia temp = new Noticia(obj_temp.getString("content"), obj_temp.getString("title"),
-                                       obj_temp.getString("description"),obj_temp.getString("url"));
+            Noticia temp = new Noticia(obj_temp.getString("author"), obj_temp.getString("content"), obj_temp.getString("description"),
+                                       obj_temp.getString("publishedAt"), obj_temp.getString("title"), obj_temp.getString("url"), obj_temp.getString("urlToImage"));
             listaNoticias.add(temp);
         }
 
@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent it = new Intent(getApplicationContext(), NoticiaDetail.class);
                 Bundle parametros = new Bundle();
 
-                parametros.putString("nome", listaNoticias.get(position).getNome());
+                parametros.putString("nome", listaNoticias.get(position).getAutor());
                 parametros.putString("titulo", listaNoticias.get(position).getTitulo());
                 parametros.putString("descricao", listaNoticias.get(position).getDescricao());
                 parametros.putString("url", listaNoticias.get(position).getUrl());
