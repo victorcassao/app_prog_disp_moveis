@@ -3,13 +3,13 @@ package com.example.noticiando;
 public class Noticia {
 
     private String nome;
-    private String tittulo;
+    private String titulo;
     private String descricao;
     private String url;
 
-    public Noticia(String nome, String tittulo, String descricao, String url) {
+    public Noticia(String nome, String titulo, String descricao, String url) {
         this.nome = nome;
-        this.tittulo = tittulo;
+        this.titulo = titulo;
         this.descricao = descricao;
         this.url = url;
     }
@@ -22,12 +22,12 @@ public class Noticia {
         this.nome = nome;
     }
 
-    public String getTittulo() {
-        return tittulo;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTittulo(String tittulo) {
-        this.tittulo = tittulo;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public String getDescricao() {
