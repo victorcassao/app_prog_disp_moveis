@@ -1,30 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+
+
+
+<androidx.constraintlayout.widget.ConstraintLayout
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NoticiaDetail">
 
     <TextView
         android:id="@+id/titulo_noticia"
-        android:layout_width="304dp"
-        android:layout_height="37dp"
-        android:layout_marginStart="66dp"
+        android:layout_width="336dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="66dp"
         android:layout_marginBottom="624dp"
         android:text="TextView"
+        android:textAlignment="viewStart"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintVertical_bias="0.045" />
 
     <TextView
         android:id="@+id/descricao_noticia"
-        android:layout_width="298dp"
+        android:layout_width="0dp"
         android:layout_height="404dp"
         android:layout_marginStart="61dp"
         android:layout_marginTop="39dp"
@@ -42,27 +56,17 @@
         android:id="@+id/url"
         android:layout_width="303dp"
         android:layout_height="56dp"
-        android:layout_marginStart="62dp"
         android:layout_marginTop="26dp"
         android:layout_marginEnd="47dp"
         android:layout_marginBottom="116dp"
         android:text="TextView"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.128"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descricao_noticia" />
+        app:layout_constraintTop_toBottomOf="@+id/descricao_noticia"
+        app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="61dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="315dp"
-        android:layout_marginBottom="10dp"
-        android:text="Título"
-        app:layout_constraintBottom_toTopOf="@+id/titulo_noticia"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
