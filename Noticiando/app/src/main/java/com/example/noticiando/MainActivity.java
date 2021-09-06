@@ -16,7 +16,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class MainActivity extends AppCompatActivity {
 
     public ArrayList<Noticia> criarNoticias(String json_string_noticias) throws JSONException {
@@ -71,9 +70,9 @@ public class MainActivity extends AppCompatActivity {
             "    ]\n" +
             "}";
 
-    Button botao;
-    Button botao2;
     ArrayList<Noticia> listaNoticias = new ArrayList<Noticia>();
+    APINewsHelper apiNewsHelper = new APINewsHelper();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         try {
-            listaNoticias = criarNoticias(json_string_noticias);
+            listaNoticias = criarNoticias(apiNewsHelper.getJson_string());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -119,29 +118,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-
-
-
-//            @Override
-//            public void onClick(View view) {
-//                // Mandando pra segunda tela
-//                // Intent it = new Intent(MainActivity.this, NoticiaDetail.class);
-//                Intent it = new Intent(getApplicationContext(),NoticiaDetail.class);
-//                Bundle parametros = new Bundle();
-//                parametros.putString("titulo",noticia.getTittulo());
-//                parametros.putString("descricao",noticia.getDescricao());
-//                it.putExtras(parametros);
-//                startActivity(it);
-//
-//            }
-//        });
-//
-
-
-
     };
+
 
 
 };
