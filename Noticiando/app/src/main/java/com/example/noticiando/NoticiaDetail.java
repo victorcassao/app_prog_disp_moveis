@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class NoticiaDetail extends AppCompatActivity {
 
@@ -18,16 +21,22 @@ public class NoticiaDetail extends AppCompatActivity {
         Bundle parametros = recebendo_info.getExtras();
 
         TextView titulo_noticia_tv = findViewById(R.id.titulo_noticia);
+        TextView autor_noticia_tv = findViewById(R.id.autor_noticia);
+        TextView dt_publicacao_noticia_tv = findViewById(R.id.dt_publicacao_noticia);
         TextView descricao_noticia_tv = findViewById(R.id.descricao_noticia);
-        TextView url_noticia_tv = findViewById(R.id.url);
+        TextView conteudo_noticia_tv = findViewById(R.id.conteudo_noticia);
+        TextView url_noticia_tv = findViewById(R.id.url_noticia);
+        ImageView img_noticia = (ImageView) findViewById(R.id.img_noticias);
 
         titulo_noticia_tv.setText(parametros.getString("titulo"));
+        autor_noticia_tv.setText(parametros.getString("autor"));
+        dt_publicacao_noticia_tv.setText(parametros.getString("data_publicacao"));
         descricao_noticia_tv.setText(parametros.getString("descricao"));
+        conteudo_noticia_tv.setText(parametros.getString("conteudo_noticia"));
         url_noticia_tv.setText(parametros.getString("url"));
+        Picasso.get().load(parametros.getString("url_to_image")).into(img_noticia);
 
-//        parametros.putString("nome", listaNoticias.get(position).getNome());
-//        parametros.putString("titulo", listaNoticias.get(position).getTitulo());
-//        parametros.putString("descricao", listaNoticias.get(position).getDescricao());
-//        parametros.putString("url", listaNoticias.get(position).getUrl());
+
+
     }
 }

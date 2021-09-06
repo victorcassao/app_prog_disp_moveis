@@ -102,14 +102,17 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // Mandando pra segunda tela
-                // Intent it = new Intent(MainActivity.this, NoticiaDetail.class);
                 Intent it = new Intent(getApplicationContext(), NoticiaDetail.class);
                 Bundle parametros = new Bundle();
 
-                parametros.putString("nome", listaNoticias.get(position).getAutor());
                 parametros.putString("titulo", listaNoticias.get(position).getTitulo());
+                parametros.putString("autor", listaNoticias.get(position).getAutor());
+                parametros.putString("data_publicacao", listaNoticias.get(position).getDataPublicacao());
                 parametros.putString("descricao", listaNoticias.get(position).getDescricao());
+                parametros.putString("conteudo_noticia", listaNoticias.get(position).getConteudo());
                 parametros.putString("url", listaNoticias.get(position).getUrl());
+                parametros.putString("url_to_image", listaNoticias.get(position).getUrlToImage());
+
                 it.putExtras(parametros);
                 startActivity(it);
             }
