@@ -30,10 +30,10 @@ public class NoticiaDetail extends AppCompatActivity {
         ImageView img_noticia = (ImageView) findViewById(R.id.img_noticias);
 
         titulo_noticia_tv.setText(parametros.getString("titulo"));
-        autor_noticia_tv.setText(parametros.getString("autor"));
-        dt_publicacao_noticia_tv.setText(parametros.getString("data_publicacao"));
-        descricao_noticia_tv.setText(parametros.getString("descricao"));
-        conteudo_noticia_tv.setText(parametros.getString("conteudo_noticia"));
+        autor_noticia_tv.setText((parametros.getString("autor").equals("null")?"Desconhecido":parametros.getString("autor")));
+        dt_publicacao_noticia_tv.setText(parametros.getString("data_publicacao").substring(0,10) + " as " + parametros.getString("data_publicacao").substring(11,16));
+//        descricao_noticia_tv.setText(parametros.getString("descricao"));
+        conteudo_noticia_tv.setText(parametros.getString("conteudo_noticia").substring(0,parametros.getString("conteudo_noticia").length()-14)+"[Leia mais clicando no link do final da página]");
         url_noticia_tv.setText(parametros.getString("url"));
         Picasso.get().load(parametros.getString("url_to_image")).into(img_noticia);
 
