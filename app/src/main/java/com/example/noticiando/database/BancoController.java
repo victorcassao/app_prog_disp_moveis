@@ -2,10 +2,13 @@ package com.example.noticiando.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.noticiando.objects.Usuario;
+
+import java.util.Objects;
 
 public class BancoController {
     private SQLiteDatabase db;
@@ -40,5 +43,23 @@ public class BancoController {
     }
 
 
+    public boolean autenticaUsuario(String usuario, String senha) {
+        db = banco.getReadableDatabase();
+        String sql_busca_pessoas = "SELECT * FROM usuario WHERE username = " + "'" + usuario + "'";
+        Cursor c = db.rawQuery(sql_busca_pessoas, null);
+        while (c.moveToNext()) {
+            Log.d("logwhile", c.getString(3));
+            if (Objects.equals(senha, c.getString(3))) {
+                Log.d("senha", "deucertoautenticar");
+                return true;
+            }else {
+                Log.d("senha1", "naocertoautenticar");
+                return false;
+            }
+        }
+
+        c.close();
+        return false;
+    }
 
 }
