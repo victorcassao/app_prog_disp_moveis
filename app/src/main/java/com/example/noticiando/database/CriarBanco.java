@@ -9,10 +9,10 @@ public class CriarBanco extends SQLiteOpenHelper{
     public static final String NOME_BASE_DADOS_NOTICIANDO = "noticiando.db";
 
     // Versionamento banco de dados
-    public static final int VERSAO = 2;
+    public static final int VERSAO = 4;
 
     // Dados tabela usuario
-    public static final String TABELA_USUARIO = "pessoa";
+    public static final String TABELA_USUARIO = "usuario";
     public static final String ID_USUARIO = "_id";
     public static final String NOME_USUARIO = "nome";
     public static final String USERNAME = "username";
