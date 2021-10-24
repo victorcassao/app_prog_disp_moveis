@@ -33,17 +33,19 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        // Inicio a tabela com as notícias
         try {
             init.importAll();
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        Usuario victor = new Usuario("Victor Cassão2","cassao2","12345",false);
+        Usuario victor = new Usuario("Victor Cassão","victor","12345",false);
+        Usuario menor = new Usuario("João Pedro","menor","67898",false);
         Boolean resultado = null;
-
         try {
             resultado = db.insereDadoUsuario(victor);
+            resultado = db.insereDadoUsuario(menor);
         } catch (Exception e) {
             e.printStackTrace();
         }

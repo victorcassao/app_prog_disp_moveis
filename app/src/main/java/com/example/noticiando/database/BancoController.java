@@ -41,7 +41,6 @@ public class BancoController {
         }
     }
 
-
     public boolean autenticaUsuario(String usuario, String senha) throws Exception {
         db = banco.getReadableDatabase();
         String sql_busca_pessoas = "SELECT * FROM usuario WHERE username = " + "'" + usuario + "'";

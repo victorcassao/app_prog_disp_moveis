@@ -1,11 +1,13 @@
 package com.example.noticiando.objects;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.noticiando.LoginActivity;
 import com.example.noticiando.R;
 import com.example.noticiando.database.BancoController;
 
@@ -40,7 +42,17 @@ public class CadastroUsuario extends AppCompatActivity {
                 usuario_cadastro_senha.getText().toString();
 
 
-                bancoController.insereDadoUsuario(new Usuario(usuario_cadastro_nome.getText().toString(), usuario_cadastro_login.getText().toString(), usuario_cadastro_senha.getText().toString(), true));
+                try {
+                    bancoController.insereDadoUsuario(new Usuario(usuario_cadastro_nome.getText().toString(),
+                                                                  usuario_cadastro_login.getText().toString(),
+                                                                  usuario_cadastro_senha.getText().toString(),
+                                                     false));
+
+                    Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
 
