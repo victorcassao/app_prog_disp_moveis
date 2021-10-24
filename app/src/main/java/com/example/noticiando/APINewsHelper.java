@@ -9,7 +9,7 @@ public class APINewsHelper {
             "                \"id\": null,\n" +
             "                \"name\": \"Jornalcontabil.com.br\"\n" +
             "            },\n" +
-            "            \"author\": \"Ricardo Junior\",\n" +
+            "            \"author\": \"Ricardo Junior - O Brabo\",\n" +
             "            \"title\": \"Revisão do FGTS pode pagar entre R$ 14 mil a R$ 66 mil aos trabalhadores - Jornal Contábil\",\n" +
             "            \"description\": \"Os trabalhadores que estão em busca de um rendimento extra podem contar com a revisão do Fundo de Garantia do Tempo de Serviço (FGTS)\",\n" +
             "            \"url\": \"https://www.jornalcontabil.com.br/revisao-do-fgts-pode-pagar-entre-r-14-mil-a-r-66-mil-aos-trabalhadores/\",\n" +
