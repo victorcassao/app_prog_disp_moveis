@@ -12,7 +12,10 @@ import android.widget.Toast;
 import com.example.noticiando.MainActivity;
 import com.example.noticiando.R;
 import com.example.noticiando.database.BancoController;
+import com.example.noticiando.objects.CarregaNoticias;
 import com.example.noticiando.objects.Usuario;
+
+import org.json.JSONException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,14 +24,22 @@ public class LoginActivity extends AppCompatActivity {
     Button botao_login;
 
     BancoController db = new BancoController(this);
+    CarregaNoticias init = new CarregaNoticias(db);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        try {
+            init.importAll();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
         Usuario victor = new Usuario("Victor Cassão2","cassao2","12345",false);
         Boolean resultado = null;
+
         try {
             resultado = db.insereDadoUsuario(victor);
         } catch (Exception e) {

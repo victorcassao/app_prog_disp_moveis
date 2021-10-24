@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.noticiando.objects.Noticia;
 import com.example.noticiando.objects.Usuario;
 
 import java.security.MessageDigest;
@@ -52,12 +53,34 @@ public class BancoController {
                 return false;
             }
         }
-
 //        c.close();
         return false;
     }
 
+    public void insereNoticia(Noticia noticia, String categoria){
+        db = banco.getWritableDatabase();
 
+        ContentValues valores;
+        long resultado;
+        valores = new ContentValues();
+
+        valores.put(CriarBanco.AUTOR_NOTICIAS, noticia.getAutor());
+        valores.put(CriarBanco.CONTEUDO_NOTICIAS, noticia.getConteudo());
+        valores.put(CriarBanco.DESCRICAO_NOTICIAS, noticia.getDescricao());
+        valores.put(CriarBanco.DATA_PUBLICACAO_NOTICIAS, noticia.getDataPublicacao());
+        valores.put(CriarBanco.TITULO_NOTICIAS, noticia.getTitulo());
+        valores.put(CriarBanco.URL_NOTICIAS, noticia.getUrl());
+        valores.put(CriarBanco.URL_TO_NOTICIAS, noticia.getUrlToImage());
+        valores.put(CriarBanco.CATEGORIA_NOTICIAS, categoria);
+
+        resultado = db.insert(CriarBanco.TABELA_NOTICIAS, null, valores);
+
+        if (resultado == -1) {
+            Log.d("erro_noticia","Erro ao inserir a noticia " + noticia.getTitulo());
+        } else {
+            Log.d("sucesso_noticia","Sucesso ao inserir a noticia " + noticia.getTitulo());
+        }
+    }
 
     public static String gerarHash(String senha) throws Exception {
         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
