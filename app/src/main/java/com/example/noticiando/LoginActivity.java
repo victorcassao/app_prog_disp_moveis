@@ -13,6 +13,7 @@ import com.example.noticiando.MainActivity;
 import com.example.noticiando.R;
 import com.example.noticiando.database.BancoController;
 import com.example.noticiando.objects.CarregaNoticias;
+import com.example.noticiando.objects.CadastroUsuario;
 import com.example.noticiando.objects.Usuario;
 
 import org.json.JSONException;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText usuario_login;
     EditText senha_login;
     Button botao_login;
+    Button botao_cadastra;
 
     BancoController db = new BancoController(this);
     CarregaNoticias init = new CarregaNoticias(db);
@@ -54,6 +56,15 @@ public class LoginActivity extends AppCompatActivity {
         usuario_login = findViewById(R.id.usuario_login);
         senha_login = findViewById(R.id.senha_login);
         botao_login = findViewById(R.id.botao_login);
+        botao_cadastra = findViewById(R.id.botao_cadastra);
+
+           botao_cadastra.setOnClickListener(new View.OnClickListener() {
+               @Override
+               public void onClick(View view) {
+                   Intent intent = new Intent(getApplicationContext(), CadastroUsuario.class);
+                   startActivity(intent);
+               }
+           });
 
            botao_login.setOnClickListener(new View.OnClickListener() {
             @Override
