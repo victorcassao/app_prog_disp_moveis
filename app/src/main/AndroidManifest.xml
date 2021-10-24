@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Noticiando">
         <activity
+            android:name=".objects.CadastroUsuario"
+            android:exported="true" />
+        <activity
             android:name=".objects_activities.ListarNoticias"
             android:exported="true" />
         <activity
@@ -26,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
