@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.noticiando.objects.Usuario;
 
+import java.security.MessageDigest;
 import java.util.Objects;
 
 public class BancoController {
@@ -18,7 +19,7 @@ public class BancoController {
         banco = new CriarBanco(context);
     }
 
-    public Boolean insereDadoUsuario(Usuario pessoa) {
+    public Boolean insereDadoUsuario(Usuario pessoa) throws Exception {
         db = banco.getWritableDatabase();
         ContentValues valores;
         long resultado;
@@ -26,40 +27,47 @@ public class BancoController {
 
         valores.put(CriarBanco.NOME_USUARIO, pessoa.getNome());
         valores.put(CriarBanco.USERNAME, pessoa.getUser());
-        valores.put(CriarBanco.SENHA_USUARIO, pessoa.getSenha());
+        valores.put(CriarBanco.SENHA_USUARIO, gerarHash(pessoa.getSenha()));
         valores.put(CriarBanco.ISADMINISTRATOR, pessoa.isAdministrator());
         valores.put(CriarBanco.ISACTIVE, pessoa.isActive());
 
         resultado = db.insert(CriarBanco.TABELA_USUARIO, null, valores);
 
-
         if (resultado == -1) {
-//            Log.d("erro_ao_inserir", "O dado não foi inserido, amigo." + resultado);
             return false;
         } else {
-//            Log.d("sucesso_ao_inserir", "O dado foi inserido, amigo.");
             return true;
         }
     }
 
 
-    public boolean autenticaUsuario(String usuario, String senha) {
+    public boolean autenticaUsuario(String usuario, String senha) throws Exception {
         db = banco.getReadableDatabase();
         String sql_busca_pessoas = "SELECT * FROM usuario WHERE username = " + "'" + usuario + "'";
         Cursor c = db.rawQuery(sql_busca_pessoas, null);
         while (c.moveToNext()) {
-            Log.d("logwhile", c.getString(3));
-            if (Objects.equals(senha, c.getString(3))) {
-                Log.d("senha", "deucertoautenticar");
+            if (Objects.equals(gerarHash(senha), c.getString(3))) {
                 return true;
             }else {
-                Log.d("senha1", "naocertoautenticar");
                 return false;
             }
         }
 
-        c.close();
+//        c.close();
         return false;
+    }
+
+
+
+    public static String gerarHash(String senha) throws Exception {
+        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+        byte hash[] = algorithm.digest(senha.getBytes("UTF-8"));
+
+        StringBuilder texto = new StringBuilder();
+        for (byte b : hash) {
+            texto.append(String.format("%02X", 0xFF & b));
+        }
+        return texto.toString();
     }
 
 }
