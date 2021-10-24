@@ -4,16 +4,25 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.example.noticiando.database.BancoController;
+import com.example.noticiando.objects.APINewsHelper;
+import com.example.noticiando.objects.Noticia;
+import com.example.noticiando.objects.Usuario;
+import com.example.noticiando.objects_activities.NoticiaDetail;
+
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
+    BancoController bancoController = new BancoController(this);
 
     public ArrayList<Noticia> criarNoticias(String json_string_noticias) throws JSONException {
         ArrayList<Noticia> listaNoticias = new ArrayList<Noticia>();
@@ -38,6 +47,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Usuario victor = new Usuario("Victor Cassão","victor","1234",false);
+
+        Boolean resultado = bancoController.insereDadoUsuario(victor);
+        if(resultado){
+            Log.d("erro_ao_inserir", "O dado não foi inserido, amigo." + resultado);
+        }else{
+            Log.d("sucesso_ao_inserir", "O dado foi inserido, amigo.");
+        }
 
         try {
             listaNoticias = criarNoticias(apiNewsHelper.getJson_string());

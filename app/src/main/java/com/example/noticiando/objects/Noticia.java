@@ -1,4 +1,4 @@
-package com.example.noticiando;
+package com.example.noticiando.objects;
 
 public class Noticia {
 

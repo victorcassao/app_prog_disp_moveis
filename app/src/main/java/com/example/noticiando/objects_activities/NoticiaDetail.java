@@ -1,4 +1,4 @@
-package com.example.noticiando;
+package com.example.noticiando.objects_activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.text.method.LinkMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.noticiando.R;
 import com.squareup.picasso.Picasso;
 
 public class NoticiaDetail extends AppCompatActivity {

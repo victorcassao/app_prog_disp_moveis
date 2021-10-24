@@ -1,4 +1,4 @@
-package com.example.noticiando;
+package com.example.noticiando.objects;
 // URL que gera esses dados
 // https://newsapi.org/v2/top-headlines?country=br&category=business&apiKey=615f261b85c141829c6fe0b949406cf1
 public class APINewsHelper {
