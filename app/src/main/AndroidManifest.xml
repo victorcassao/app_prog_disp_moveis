@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.noticiando">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Noticiando">
         <activity
-            android:name=".NoticiaDetail"
+            android:name=".objects_activities.ListarNoticias"
+            android:exported="true" />
+        <activity
+            android:name=".objects_activities.NoticiaDetail"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
