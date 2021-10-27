@@ -15,6 +15,7 @@ import com.example.noticiando.database.BancoController;
 import com.example.noticiando.objects.CarregaNoticias;
 import com.example.noticiando.objects.CadastroUsuario;
 import com.example.noticiando.objects.Usuario;
+import com.example.noticiando.objects_activities.ListarNoticias;
 
 import org.json.JSONException;
 
@@ -77,12 +78,13 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
                 if(resultado == true){
 //                    Usuario user = db.getUsuario(usuario_login.getText().toString());
 //                    Toast toast = Toast.makeText(getApplicationContext(), "ID usuário" + user.getId() + " - Nome usuario: " + user.getNome(), Toast.LENGTH_SHORT);
 //                    toast.show();
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);
                   //  intent.putExtra("usuario", user);
                     startActivity(intent);
                 }else{
