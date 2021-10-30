@@ -3,6 +3,7 @@ package com.example.noticiando;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,8 +12,12 @@ import android.widget.Toast;
 import com.example.noticiando.MainActivity;
 import com.example.noticiando.R;
 import com.example.noticiando.database.BancoController;
+import com.example.noticiando.objects.CarregaNoticias;
 import com.example.noticiando.objects.CadastroUsuario;
 import com.example.noticiando.objects.Usuario;
+import com.example.noticiando.objects_activities.ListarNoticias;
+
+import org.json.JSONException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -22,11 +27,34 @@ public class LoginActivity extends AppCompatActivity {
     Button botao_cadastra;
 
     BancoController db = new BancoController(this);
+    CarregaNoticias init = new CarregaNoticias(db);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Inicio a tabela com as notícias
+        try {
+            init.importAll();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Usuario victor = new Usuario("Victor Cassão","victor","12345",false);
+        Usuario menor = new Usuario("João Pedro","menor","67898",false);
+        Boolean resultado = null;
+        try {
+            resultado = db.insereDadoUsuario(victor);
+            resultado = db.insereDadoUsuario(menor);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(resultado){
+            Log.d("erro_ao_inserir", "O dado não foi inserido, amigo." + resultado);
+        }else{
+            Log.d("sucesso_ao_inserir", "O dado foi inserido, amigo.");
+        }
 
         usuario_login = findViewById(R.id.usuario_login);
         senha_login = findViewById(R.id.senha_login);
@@ -44,15 +72,31 @@ public class LoginActivity extends AppCompatActivity {
            botao_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean resultado = db.autenticaUsuario(usuario_login.getText().toString(), senha_login.getText().toString());
-                if(resultado == true){
-//                    Usuario user = db.getUsuario(usuario_login.getText().toString());
-//                    Toast toast = Toast.makeText(getApplicationContext(), "ID usuário" + user.getId() + " - Nome usuario: " + user.getNome(), Toast.LENGTH_SHORT);
-//                    toast.show();
+                boolean resultado = false;
+                try {
+                    resultado = db.autenticaUsuario(usuario_login.getText().toString(), senha_login.getText().toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                  //  intent.putExtra("usuario", user);
-                    startActivity(intent);
+                if(resultado == true){
+                    Boolean test = false;
+                    try {
+                        test = db.checaCadastroCategoriaNoticia(usuario_login.getText().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if(test){
+                        Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);
+                        startActivity(intent);
+                    }else{
+                        Toast toast = Toast.makeText(getApplicationContext(), "Não cadastrou: ID usuário" + usuario_login.getText().toString(), Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+
+//                    Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);
+//                    intent.putExtra("usuario", user);
+//                    startActivity(intent);
                 }else{
                     usuario_login.setText("");
                     senha_login.setText("");

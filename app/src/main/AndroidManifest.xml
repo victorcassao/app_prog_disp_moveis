@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Noticiando">
         <activity
+            android:name=".objects_activities.SelecionaCategoriaActivity"
+            android:exported="true" />
+        <activity
             android:name=".objects.CadastroUsuario"
             android:exported="true" />
         <activity

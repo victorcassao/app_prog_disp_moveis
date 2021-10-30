@@ -47,14 +47,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Usuario victor = new Usuario("Victor Cassão","victor","1234",false);
 
-        Boolean resultado = bancoController.insereDadoUsuario(victor);
-        if(resultado){
-            Log.d("erro_ao_inserir", "O dado não foi inserido, amigo." + resultado);
-        }else{
-            Log.d("sucesso_ao_inserir", "O dado foi inserido, amigo.");
-        }
 
         try {
             listaNoticias = criarNoticias(apiNewsHelper.getJson_string());
