@@ -31,6 +31,7 @@ public class BancoController {
         valores.put(CriarBanco.SENHA_USUARIO, gerarHash(pessoa.getSenha()));
         valores.put(CriarBanco.ISADMINISTRATOR, pessoa.isAdministrator());
         valores.put(CriarBanco.ISACTIVE, pessoa.isActive());
+        valores.put(CriarBanco.ESCOLHA_CATEG_NOTICIA, false);
 
         resultado = db.insert(CriarBanco.TABELA_USUARIO, null, valores);
 
@@ -56,6 +57,22 @@ public class BancoController {
         return false;
     }
 
+    public boolean checaCadastroCategoriaNoticia(String usuario) throws Exception {
+        db = banco.getReadableDatabase();
+        String sql_busca_pessoas = "SELECT * FROM usuario WHERE username = " + "'" + usuario + "'";
+        Cursor c = db.rawQuery(sql_busca_pessoas, null);
+        c.moveToFirst();
+        Boolean retorno = c.getInt(6) == 0?false:true;
+
+        if (retorno) {
+            Log.d("query_deu_bom","Sucesso ao inserir a categoria da noticia  - Valor retornado = " + retorno);
+        } else {
+            Log.d("query_deu_ruim","Erro ao inserir a categoria da noticia - Valor retornado = " + retorno);
+        }
+
+        return retorno;
+    }
+
     public void insereNoticia(Noticia noticia, String categoria){
         db = banco.getWritableDatabase();
 
@@ -79,6 +96,25 @@ public class BancoController {
         } else {
             Log.d("sucesso_noticia","Sucesso ao inserir a noticia " + noticia.getTitulo());
         }
+    }
+
+    public void insereCategoriaNoticia(String nome_categoria_noticia){
+        db = banco.getWritableDatabase();
+
+        ContentValues valores;
+        long resultado;
+        valores = new ContentValues();
+
+        valores.put(CriarBanco.NOME_CATEG_NOTICIA, nome_categoria_noticia);
+
+        resultado = db.insert(CriarBanco.TABELA_CATEGORIAS_NOTICIAS, null, valores);
+
+        if (resultado == -1) {
+            Log.d("erro_categoria_noticia","Erro ao inserir a categoria da noticia " + nome_categoria_noticia);
+        } else {
+            Log.d("sucesso_categ_noticia","Sucesso ao inserir a categoria da noticia " + nome_categoria_noticia);
+        }
+
     }
 
     public static String gerarHash(String senha) throws Exception {

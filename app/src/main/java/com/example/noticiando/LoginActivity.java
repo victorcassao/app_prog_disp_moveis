@@ -15,6 +15,7 @@ import com.example.noticiando.database.BancoController;
 import com.example.noticiando.objects.CarregaNoticias;
 import com.example.noticiando.objects.CadastroUsuario;
 import com.example.noticiando.objects.Usuario;
+import com.example.noticiando.objects_activities.ListarNoticias;
 
 import org.json.JSONException;
 
@@ -77,14 +78,25 @@ public class LoginActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                if(resultado == true){
-//                    Usuario user = db.getUsuario(usuario_login.getText().toString());
-//                    Toast toast = Toast.makeText(getApplicationContext(), "ID usuário" + user.getId() + " - Nome usuario: " + user.getNome(), Toast.LENGTH_SHORT);
-//                    toast.show();
 
-                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                  //  intent.putExtra("usuario", user);
-                    startActivity(intent);
+                if(resultado == true){
+                    Boolean test = false;
+                    try {
+                        test = db.checaCadastroCategoriaNoticia(usuario_login.getText().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if(test){
+                        Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);
+                        startActivity(intent);
+                    }else{
+                        Toast toast = Toast.makeText(getApplicationContext(), "Não cadastrou: ID usuário" + usuario_login.getText().toString(), Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
+
+//                    Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);
+//                    intent.putExtra("usuario", user);
+//                    startActivity(intent);
                 }else{
                     usuario_login.setText("");
                     senha_login.setText("");

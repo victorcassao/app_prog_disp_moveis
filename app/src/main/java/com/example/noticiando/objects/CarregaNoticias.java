@@ -30,6 +30,17 @@ public class CarregaNoticias {
         carregarNoticiasGeral();
         carregarNoticiasNegocios();
         carregarNoticiasSaude();
+        carregaCategoriaNoticias();
+    }
+
+    private void carregaCategoriaNoticias(){
+        db.insereCategoriaNoticia("Esportes");
+        db.insereCategoriaNoticia("Tecnologia");
+        db.insereCategoriaNoticia("Ciência");
+        db.insereCategoriaNoticia("Entretenimento");
+        db.insereCategoriaNoticia("Geral");
+        db.insereCategoriaNoticia("Negócios");
+        db.insereCategoriaNoticia("Saúde");
     }
 
     private void carregarNoticiasEsportes() throws JSONException {
