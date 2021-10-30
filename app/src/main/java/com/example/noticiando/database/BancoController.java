@@ -1,23 +1,38 @@
 package com.example.noticiando.database;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.noticiando.objects.Noticia;
 import com.example.noticiando.objects.Usuario;
 
+import java.io.Serializable;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.Objects;
 
-public class BancoController {
+public class BancoController implements Serializable {
     private SQLiteDatabase db;
     private CriarBanco banco;
 
     public BancoController(Context context){
         banco = new CriarBanco(context);
+    }
+
+    public ArrayList<Integer> retornaListaPreferenciarUsuario(Usuario user){
+        ArrayList<Integer> preferenciasUsuario = new ArrayList<>();
+        db = banco.getReadableDatabase();
+        String sql_busca_pessoas = "SELECT * FROM " + CriarBanco.TABELA_USUARIO_CATEG_NOTICIA + " WHERE " + CriarBanco.FK_USUARIO + " = " + user.getId();
+        Cursor c = db.rawQuery(sql_busca_pessoas, null);
+        while (c.moveToNext()) {
+            preferenciasUsuario.add(c.getInt(1));
+        }
+        return preferenciasUsuario;
     }
 
     public Boolean insereDadoUsuario(Usuario pessoa) throws Exception {
@@ -73,6 +88,25 @@ public class BancoController {
         return retorno;
     }
 
+    @SuppressLint("Range")
+    public Usuario getUsuario(String nome_usuario){
+        db = banco.getReadableDatabase();
+        String sql_retorna_usuario = "SELECT * FROM " + banco.TABELA_USUARIO + " WHERE username = '" + nome_usuario + "'";
+        Cursor cursor = db.rawQuery(sql_retorna_usuario,null);
+        Usuario user_temp = new Usuario();
+        while(cursor.moveToNext()){
+            if(Objects.equals(nome_usuario, cursor.getString(2))){
+                user_temp.setId(cursor.getInt(0)); // Setando ID
+                user_temp.setNome(cursor.getString(1)); // Setando nome
+                user_temp.setUser(cursor.getString(2)); // Setando username
+                user_temp.setSenha(cursor.getString(3)); // Setando senha
+                user_temp.setAdministrator((cursor.getInt(4)==0?false:true)); // Setando se é adm ou não
+            }
+        }
+        Log.d("getUsuario","Nome do usuário: " + user_temp.getNome());
+        return user_temp;
+    }
+
     public void insereNoticia(Noticia noticia, String categoria){
         db = banco.getWritableDatabase();
 
@@ -114,6 +148,46 @@ public class BancoController {
         } else {
             Log.d("sucesso_categ_noticia","Sucesso ao inserir a categoria da noticia " + nome_categoria_noticia);
         }
+
+    }
+
+    public void insereUsuarioCategoria(Usuario user, Integer id_categoria){
+        db = banco.getWritableDatabase();
+
+        ContentValues valores;
+        long resultado;
+        valores = new ContentValues();
+
+        valores.put(CriarBanco.FK_USUARIO, user.getId());
+        valores.put(CriarBanco.FK_CATEG_NOTICIA, id_categoria);
+
+        resultado = db.insert(CriarBanco.TABELA_USUARIO_CATEG_NOTICIA, null, valores);
+
+        if (resultado == -1) {
+            Log.d("erro_inserir_uscat","Erro ao inserir a categoria da noticia " + id_categoria + " no usuário " + user.getNome());
+        } else {
+            Log.d("sucesso_inserir_uscat","Sucesso ao inserir a categoria da noticia " + id_categoria + " no usuário " + user.getNome());
+        }
+    }
+
+    public void atualizaFlagCategoriaNoticia(Usuario user){
+
+        db = banco.getWritableDatabase();
+
+        ContentValues valores;
+        long resultado;
+        valores = new ContentValues();
+
+        valores.put(CriarBanco.ESCOLHA_CATEG_NOTICIA, true);
+
+        resultado = db.update(CriarBanco.TABELA_USUARIO,valores,"_id = " + user.getId(),null);
+
+        if (resultado == -1) {
+            Log.d("erro_inserir_uscat","Erro ao atualizar a flag de já cadastrado categoria de preferencia no usuário " + user.getNome());
+        } else {
+            Log.d("sucesso_inserir_uscat","Sucesso ao atualizar a flag de já cadastrado categoria de preferencia no usuário " + user.getNome());
+        }
+
 
     }
 

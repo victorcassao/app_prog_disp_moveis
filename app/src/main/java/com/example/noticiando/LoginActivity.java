@@ -16,6 +16,7 @@ import com.example.noticiando.objects.CarregaNoticias;
 import com.example.noticiando.objects.CadastroUsuario;
 import com.example.noticiando.objects.Usuario;
 import com.example.noticiando.objects_activities.ListarNoticias;
+import com.example.noticiando.objects_activities.SelecionaCategoriaActivity;
 
 import org.json.JSONException;
 
@@ -81,6 +82,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 if(resultado == true){
                     Boolean test = false;
+                    Usuario usuario = db.getUsuario(usuario_login.getText().toString());
                     try {
                         test = db.checaCadastroCategoriaNoticia(usuario_login.getText().toString());
                     } catch (Exception e) {
@@ -88,10 +90,12 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     if(test){
                         Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);
+                        intent.putExtra("usuario",usuario);
                         startActivity(intent);
                     }else{
-                        Toast toast = Toast.makeText(getApplicationContext(), "Não cadastrou: ID usuário" + usuario_login.getText().toString(), Toast.LENGTH_SHORT);
-                        toast.show();
+                        Intent intent = new Intent(getApplicationContext(), SelecionaCategoriaActivity.class);
+                        intent.putExtra("usuario",usuario);
+                        startActivity(intent);
                     }
 
 //                    Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);

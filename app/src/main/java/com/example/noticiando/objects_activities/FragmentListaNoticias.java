@@ -3,9 +3,11 @@ package com.example.noticiando.objects_activities;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.noticiando.R;
+import com.example.noticiando.database.BancoController;
 import com.example.noticiando.objects.APINewsHelper;
 import com.example.noticiando.objects.Noticia;
+import com.example.noticiando.objects.Usuario;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,7 +35,6 @@ import java.util.ArrayList;
 public class FragmentListaNoticias extends Fragment {
 
     public ArrayList<Noticia> criarNoticias(String json_string_noticias) throws JSONException {
-        ArrayList<Noticia> listaNoticias = new ArrayList<Noticia>();
 
         JSONObject my_obj = new JSONObject(json_string_noticias);
         JSONArray noticias = my_obj.getJSONArray("articles");
@@ -85,6 +88,24 @@ public class FragmentListaNoticias extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+
+        Bundle bundle = getArguments();
+
+        BancoController db = (BancoController) bundle.getSerializable("db");
+        Usuario user = (Usuario) bundle.getSerializable("user");
+
+        // Select das preferencias de categoria das noticias do usuário logado.
+        ArrayList<Integer> preferenciasUsuario = db.retornaListaPreferenciarUsuario(user);
+
+        for (int i = 0; i < preferenciasUsuario.size(); i++){
+            Log.d("preferenciasUsuario","Item do arraylist na posição : " + i + " - Valor = " + preferenciasUsuario.get(i));
+        }
+
+        for (int i = 0; i < preferenciasUsuario.size(); i++){
+
+        }
+
+        // -========================================================================-
         try {
             listaNoticias = criarNoticias(apiNewsHelper.getJson_string());
         } catch (JSONException e) {
