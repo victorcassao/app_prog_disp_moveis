@@ -81,6 +81,25 @@ public class BancoController {
         }
     }
 
+    public void insereCategoriaNoticia(String nome_categoria_noticia){
+        db = banco.getWritableDatabase();
+
+        ContentValues valores;
+        long resultado;
+        valores = new ContentValues();
+
+        valores.put(CriarBanco.NOME_CATEG_NOTICIA, nome_categoria_noticia);
+
+        resultado = db.insert(CriarBanco.TABELA_CATEGORIAS_NOTICIAS, null, valores);
+
+        if (resultado == -1) {
+            Log.d("erro_categoria_noticia","Erro ao inserir a categoria da noticia " + nome_categoria_noticia);
+        } else {
+            Log.d("sucesso_categ_noticia","Sucesso ao inserir a categoria da noticia " + nome_categoria_noticia);
+        }
+
+    }
+
     public static String gerarHash(String senha) throws Exception {
         MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
         byte hash[] = algorithm.digest(senha.getBytes("UTF-8"));
