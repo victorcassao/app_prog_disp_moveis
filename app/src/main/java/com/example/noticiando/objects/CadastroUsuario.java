@@ -25,7 +25,7 @@ public class CadastroUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_usuario);
 
         botao_cadastro_usuario = findViewById(R.id.botao_cadastro_usuario);
-
+        
 
         botao_cadastro_usuario.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,7 +40,12 @@ public class CadastroUsuario extends AppCompatActivity {
                 usuario_cadastro_senha.getText().toString();
 
 
-                bancoController.insereDadoUsuario(new Usuario(usuario_cadastro_nome.getText().toString(), usuario_cadastro_login.getText().toString(), usuario_cadastro_senha.getText().toString(), true));
+
+
+                bancoController.insereDadoUsuario(new Usuario(usuario_cadastro_nome.getText().toString(),
+                        usuario_cadastro_login.getText().toString(), usuario_cadastro_senha.getText().toString(),
+                        true));
+
             }
         });
 
