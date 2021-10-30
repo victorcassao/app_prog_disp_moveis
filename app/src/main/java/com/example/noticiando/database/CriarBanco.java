@@ -9,7 +9,7 @@ public class CriarBanco extends SQLiteOpenHelper{
     public static final String NOME_BASE_DADOS_NOTICIANDO = "noticiando.db";
 
     // Versionamento banco de dados
-    public static final int VERSAO = 16;
+    public static final int VERSAO = 17;
 
     // Dados tabela usuario
     public static final String TABELA_USUARIO = "usuario";
@@ -19,6 +19,7 @@ public class CriarBanco extends SQLiteOpenHelper{
     public static final String SENHA_USUARIO = "senha";
     public static final String ISADMINISTRATOR = "isAdministrator";
     public static final String ISACTIVE = "isActive";
+    public static final String ESCOLHA_CATEG_NOTICIA = "temCategoriaNoticia";
 
     // Dados tabela noticias
     public static final String TABELA_NOTICIAS = "noticias";
@@ -55,7 +56,8 @@ public class CriarBanco extends SQLiteOpenHelper{
                 + USERNAME + " TEXT UNIQUE,"
                 + SENHA_USUARIO + " TEXT,"
                 + ISADMINISTRATOR + " BOOLEAN, "
-                + ISACTIVE + " BOOLEAN"
+                + ISACTIVE + " BOOLEAN, "
+                + ESCOLHA_CATEG_NOTICIA + " BOOLEAN"
                 +")";
 
         // Criando tabela das noticias

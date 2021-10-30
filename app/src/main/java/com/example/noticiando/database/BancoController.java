@@ -31,6 +31,7 @@ public class BancoController {
         valores.put(CriarBanco.SENHA_USUARIO, gerarHash(pessoa.getSenha()));
         valores.put(CriarBanco.ISADMINISTRATOR, pessoa.isAdministrator());
         valores.put(CriarBanco.ISACTIVE, pessoa.isActive());
+        valores.put(CriarBanco.ESCOLHA_CATEG_NOTICIA, false);
 
         resultado = db.insert(CriarBanco.TABELA_USUARIO, null, valores);
 
@@ -54,6 +55,22 @@ public class BancoController {
         }
 //        c.close();
         return false;
+    }
+
+    public boolean checaCadastroCategoriaNoticia(String usuario) throws Exception {
+        db = banco.getReadableDatabase();
+        String sql_busca_pessoas = "SELECT * FROM usuario WHERE username = " + "'" + usuario + "'";
+        Cursor c = db.rawQuery(sql_busca_pessoas, null);
+        c.moveToFirst();
+        Boolean retorno = c.getInt(6) == 0?false:true;
+
+        if (retorno) {
+            Log.d("query_deu_bom","Sucesso ao inserir a categoria da noticia  - Valor retornado = " + retorno);
+        } else {
+            Log.d("query_deu_ruim","Erro ao inserir a categoria da noticia - Valor retornado = " + retorno);
+        }
+
+        return retorno;
     }
 
     public void insereNoticia(Noticia noticia, String categoria){

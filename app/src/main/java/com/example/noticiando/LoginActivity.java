@@ -80,13 +80,23 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if(resultado == true){
-//                    Usuario user = db.getUsuario(usuario_login.getText().toString());
-//                    Toast toast = Toast.makeText(getApplicationContext(), "ID usuário" + user.getId() + " - Nome usuario: " + user.getNome(), Toast.LENGTH_SHORT);
-//                    toast.show();
+                    Boolean test = false;
+                    try {
+                        test = db.checaCadastroCategoriaNoticia(usuario_login.getText().toString());
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    if(test){
+                        Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);
+                        startActivity(intent);
+                    }else{
+                        Toast toast = Toast.makeText(getApplicationContext(), "Não cadastrou: ID usuário" + usuario_login.getText().toString(), Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
 
-                    Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);
-                  //  intent.putExtra("usuario", user);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getApplicationContext(), ListarNoticias.class);
+//                    intent.putExtra("usuario", user);
+//                    startActivity(intent);
                 }else{
                     usuario_login.setText("");
                     senha_login.setText("");

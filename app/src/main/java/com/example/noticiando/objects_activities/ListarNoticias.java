@@ -14,6 +14,8 @@ public class ListarNoticias extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_noticias);
 
+
+
         FragmentManager fragmentManager =  getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
