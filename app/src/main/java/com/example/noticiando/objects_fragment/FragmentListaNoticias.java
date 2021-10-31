@@ -1,11 +1,7 @@
-package com.example.noticiando.objects_activities;
+package com.example.noticiando.objects_fragment;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -84,13 +80,28 @@ public class FragmentListaNoticias extends Fragment {
         return fragment;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+//    @Override
+//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+//        super.onActivityCreated(savedInstanceState);
+//
+//    }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_lista_noticias, container, false);
 
         Bundle bundle = getArguments();
-
         BancoController db = (BancoController) bundle.getSerializable("db");
         Usuario user = (Usuario) bundle.getSerializable("user");
 
@@ -109,16 +120,7 @@ public class FragmentListaNoticias extends Fragment {
             }
         }
 
-//        listaNoticias =
-
-        // -========================================================================-
-//        try {
-//            listaNoticias = criarNoticias(apiNewsHelper.getJson_string());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//        View listView = getActivity().findViewById(R.id.list);
-        ListView listNoticias = (ListView) getActivity().findViewById(R.id.listaViewNoticias);
+        ListView listNoticias = (ListView) view.findViewById(R.id.listaViewNoticias);
         ArrayList<String> noticias = new ArrayList<String>();
 
         for(Noticia notTemp : listaNoticias){
@@ -134,7 +136,7 @@ public class FragmentListaNoticias extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // Mandando pra segunda tela
-                Intent it = new Intent(getActivity(), NoticiaDetail.class);
+//                Intent it = new Intent(getActivity().getApplicationContext(), NoticiaDetail.class);
 //                Bundle parametros = new Bundle();
 //                parametros.putSerializable("noticia",listaNoticias.get(position));
 //                parametros.putString("titulo", listaNoticias.get(position).getTitulo());
@@ -144,30 +146,24 @@ public class FragmentListaNoticias extends Fragment {
 //                parametros.putString("conteudo_noticia", listaNoticias.get(position).getConteudo());
 //                parametros.putString("url", listaNoticias.get(position).getUrl());
 //                parametros.putString("url_to_image", listaNoticias.get(position).getUrlToImage());
-
 //                it.putExtras(parametros);
-                it.putExtra("teste","testando");
-                startActivity(it);
+//                it.putExtra("teste","testando");
+//                startActivity(it);
+
+//                Bundle bundle2 = new Bundle();
+//                bundle2.putString("teste","Testando");
+                Bundle enviando_noticia = new Bundle();
+                enviando_noticia.putSerializable("noticia",listaNoticias.get(position));
+
+                NoticiaDetailFragment noticiaDetailFragment = new NoticiaDetailFragment();
+                noticiaDetailFragment.setArguments(enviando_noticia);
+
+                getFragmentManager().beginTransaction().replace(R.id.fragmentNoticias,noticiaDetailFragment).addToBackStack(null).commit();
+
             }
         });
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lista_noticias, container, false);
+        return view;
 
     }
 }

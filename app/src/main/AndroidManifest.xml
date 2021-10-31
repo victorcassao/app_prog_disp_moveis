@@ -21,9 +21,6 @@
             android:name=".objects_activities.ListarNoticias"
             android:exported="true" />
         <activity
-            android:name=".objects_activities.NoticiaDetail"
-            android:exported="true" />
-        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>

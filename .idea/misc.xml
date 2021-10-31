@@ -12,6 +12,7 @@
         <entry key="app/src/main/res/layout/fragment_item.xml" value="0.32608695652173914" />
         <entry key="app/src/main/res/layout/fragment_item_list.xml" value="0.32608695652173914" />
         <entry key="app/src/main/res/layout/fragment_lista_noticias.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/fragment_noticia_detail.xml" value="0.19947916666666668" />
       </map>
     </option>
   </component>
