@@ -5,13 +5,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.example.noticiando.objects.Noticia;
 import com.example.noticiando.objects.Usuario;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -33,6 +33,24 @@ public class BancoController implements Serializable {
             preferenciasUsuario.add(c.getInt(1));
         }
         return preferenciasUsuario;
+    }
+
+    public ArrayList<Noticia> retornaListaNoticiasPorCategoria(Integer categoria){
+        ArrayList<Noticia> listaNoticiasPorCategoria = new ArrayList<>();
+        db = banco.getReadableDatabase();
+        String sql_busca_pessoas = "SELECT * FROM " + CriarBanco.TABELA_NOTICIAS + " WHERE " + CriarBanco.FK_CATEGORIA_NOTICIAS + " = " + categoria;
+        Cursor c = db.rawQuery(sql_busca_pessoas, null);
+        while (c.moveToNext()) {
+            listaNoticiasPorCategoria.add(new Noticia(  c.getString(1),
+                                                        c.getString(2),
+                                                        c.getString(3),
+                                                        c.getString(4),
+                                                        c.getString(5),
+                                                        c.getString(6),
+                                                        c.getString(7)
+                    ));
+        }
+        return listaNoticiasPorCategoria;
     }
 
     public Boolean insereDadoUsuario(Usuario pessoa) throws Exception {
@@ -107,7 +125,7 @@ public class BancoController implements Serializable {
         return user_temp;
     }
 
-    public void insereNoticia(Noticia noticia, String categoria){
+    public void insereNoticia(Noticia noticia, Integer categoria){
         db = banco.getWritableDatabase();
 
         ContentValues valores;
@@ -121,7 +139,7 @@ public class BancoController implements Serializable {
         valores.put(CriarBanco.TITULO_NOTICIAS, noticia.getTitulo());
         valores.put(CriarBanco.URL_NOTICIAS, noticia.getUrl());
         valores.put(CriarBanco.URL_TO_NOTICIAS, noticia.getUrlToImage());
-        valores.put(CriarBanco.CATEGORIA_NOTICIAS, categoria);
+        valores.put(CriarBanco.FK_CATEGORIA_NOTICIAS, categoria);
 
         resultado = db.insert(CriarBanco.TABELA_NOTICIAS, null, valores);
 
@@ -130,6 +148,14 @@ public class BancoController implements Serializable {
         } else {
             Log.d("sucesso_noticia","Sucesso ao inserir a noticia " + noticia.getTitulo());
         }
+    }
+
+    public Integer getIDCategoriaNoticia(String nome_categoria){
+        db = banco.getReadableDatabase();
+        String sql_retorna_usuario = "SELECT * FROM " + CriarBanco.TABELA_CATEGORIAS_NOTICIAS + " WHERE " + CriarBanco.NOME_CATEG_NOTICIA + " LIKE '%" + nome_categoria + "%'";
+        Cursor cursor = db.rawQuery(sql_retorna_usuario,null);
+        cursor.moveToFirst();
+        return cursor.getInt(0);
     }
 
     public void insereCategoriaNoticia(String nome_categoria_noticia){

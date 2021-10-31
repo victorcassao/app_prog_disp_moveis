@@ -42,6 +42,5 @@ public class ListarNoticias extends AppCompatActivity {
         fragmentManager.beginTransaction()
                 .add(R.id.fragmentNoticias,fragInfos)
                 .commit();
-
     }
 }

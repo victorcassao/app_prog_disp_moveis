@@ -96,21 +96,27 @@ public class FragmentListaNoticias extends Fragment {
 
         // Select das preferencias de categoria das noticias do usuário logado.
         ArrayList<Integer> preferenciasUsuario = db.retornaListaPreferenciarUsuario(user);
-
+        ArrayList<Noticia> listaTemp = new ArrayList<>();
         for (int i = 0; i < preferenciasUsuario.size(); i++){
             Log.d("preferenciasUsuario","Item do arraylist na posição : " + i + " - Valor = " + preferenciasUsuario.get(i));
         }
 
         for (int i = 0; i < preferenciasUsuario.size(); i++){
+            listaTemp = db.retornaListaNoticiasPorCategoria(preferenciasUsuario.get(i));
 
+            for(int x = 0; x < listaTemp.size(); x++){
+                listaNoticias.add(listaTemp.get(x));
+            }
         }
+
+//        listaNoticias =
 
         // -========================================================================-
-        try {
-            listaNoticias = criarNoticias(apiNewsHelper.getJson_string());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            listaNoticias = criarNoticias(apiNewsHelper.getJson_string());
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
 //        View listView = getActivity().findViewById(R.id.list);
         ListView listNoticias = (ListView) getActivity().findViewById(R.id.listaViewNoticias);
         ArrayList<String> noticias = new ArrayList<String>();
@@ -128,18 +134,19 @@ public class FragmentListaNoticias extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 // Mandando pra segunda tela
-                Intent it = new Intent(getContext(), NoticiaDetail.class);
-                Bundle parametros = new Bundle();
+                Intent it = new Intent(getActivity(), NoticiaDetail.class);
+//                Bundle parametros = new Bundle();
+//                parametros.putSerializable("noticia",listaNoticias.get(position));
+//                parametros.putString("titulo", listaNoticias.get(position).getTitulo());
+//                parametros.putString("autor", listaNoticias.get(position).getAutor());
+//                parametros.putString("data_publicacao", listaNoticias.get(position).getDataPublicacao());
+//                parametros.putString("descricao", listaNoticias.get(position).getDescricao());
+//                parametros.putString("conteudo_noticia", listaNoticias.get(position).getConteudo());
+//                parametros.putString("url", listaNoticias.get(position).getUrl());
+//                parametros.putString("url_to_image", listaNoticias.get(position).getUrlToImage());
 
-                parametros.putString("titulo", listaNoticias.get(position).getTitulo());
-                parametros.putString("autor", listaNoticias.get(position).getAutor());
-                parametros.putString("data_publicacao", listaNoticias.get(position).getDataPublicacao());
-                parametros.putString("descricao", listaNoticias.get(position).getDescricao());
-                parametros.putString("conteudo_noticia", listaNoticias.get(position).getConteudo());
-                parametros.putString("url", listaNoticias.get(position).getUrl());
-                parametros.putString("url_to_image", listaNoticias.get(position).getUrlToImage());
-
-                it.putExtras(parametros);
+//                it.putExtras(parametros);
+                it.putExtra("teste","testando");
                 startActivity(it);
             }
         });

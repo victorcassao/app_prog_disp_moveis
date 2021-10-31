@@ -1,6 +1,8 @@
 package com.example.noticiando.objects;
 
-public class Noticia {
+import java.io.Serializable;
+
+public class Noticia implements Serializable {
 
     private String autor;
     private String conteudo;

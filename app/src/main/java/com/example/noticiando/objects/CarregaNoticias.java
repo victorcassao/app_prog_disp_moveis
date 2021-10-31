@@ -23,6 +23,7 @@ public class CarregaNoticias {
     }
 
     public void importAll() throws JSONException {
+        carregarCategoriaNoticias();
         carregarNoticiasEsportes();
         carregarNoticiasTecnologia();
         carregarNoticiasCiencia();
@@ -30,22 +31,22 @@ public class CarregaNoticias {
         carregarNoticiasGeral();
         carregarNoticiasNegocios();
         carregarNoticiasSaude();
-        carregaCategoriaNoticias();
     }
 
-    private void carregaCategoriaNoticias(){
-        db.insereCategoriaNoticia("Esportes");
-        db.insereCategoriaNoticia("Tecnologia");
-        db.insereCategoriaNoticia("Ciência");
-        db.insereCategoriaNoticia("Entretenimento");
-        db.insereCategoriaNoticia("Geral");
-        db.insereCategoriaNoticia("Negócios");
-        db.insereCategoriaNoticia("Saúde");
+    private void carregarCategoriaNoticias(){
+        db.insereCategoriaNoticia(this.categoria_negocios);
+        db.insereCategoriaNoticia(this.categoria_entretenimento);
+        db.insereCategoriaNoticia(this.categoria_geral);
+        db.insereCategoriaNoticia(this.categoria_saude);
+        db.insereCategoriaNoticia(this.categoria_ciencia);
+        db.insereCategoriaNoticia(this.categoria_esportes);
+        db.insereCategoriaNoticia(this.categoria_tecnologia);
     }
 
     private void carregarNoticiasEsportes() throws JSONException {
         JSONObject my_obj = new JSONObject(APINewsHelper.getCategoria_esportes());
         JSONArray noticias = my_obj.getJSONArray("articles");
+        Integer id_noticia = db.getIDCategoriaNoticia(this.categoria_esportes);
 
         for(int i = 0; i < noticias.length(); i++){
             JSONObject obj_temp = noticias.getJSONObject(i);
@@ -55,13 +56,14 @@ public class CarregaNoticias {
                     obj_temp.getString("publishedAt"),
                     obj_temp.getString("title"),
                     obj_temp.getString("url"),
-                    obj_temp.getString("urlToImage")),this.categoria_esportes);
+                    obj_temp.getString("urlToImage")),id_noticia);
         }
     }
 
     private void carregarNoticiasTecnologia() throws JSONException {
         JSONObject my_obj = new JSONObject(APINewsHelper.getCategoria_tecnologia());
         JSONArray noticias = my_obj.getJSONArray("articles");
+        Integer id_noticia = db.getIDCategoriaNoticia(this.categoria_tecnologia);
 
         for(int i = 0; i < noticias.length(); i++){
             JSONObject obj_temp = noticias.getJSONObject(i);
@@ -71,13 +73,14 @@ public class CarregaNoticias {
                     obj_temp.getString("publishedAt"),
                     obj_temp.getString("title"),
                     obj_temp.getString("url"),
-                    obj_temp.getString("urlToImage")),this.categoria_tecnologia);
+                    obj_temp.getString("urlToImage")),id_noticia);
         }
     }
 
     private void carregarNoticiasNegocios() throws JSONException {
         JSONObject my_obj = new JSONObject(APINewsHelper.getCategoria_negocios());
         JSONArray noticias = my_obj.getJSONArray("articles");
+        Integer id_noticia = db.getIDCategoriaNoticia(this.categoria_negocios);
 
         for(int i = 0; i < noticias.length(); i++){
             JSONObject obj_temp = noticias.getJSONObject(i);
@@ -87,13 +90,14 @@ public class CarregaNoticias {
                     obj_temp.getString("publishedAt"),
                     obj_temp.getString("title"),
                     obj_temp.getString("url"),
-                    obj_temp.getString("urlToImage")),this.categoria_negocios);
+                    obj_temp.getString("urlToImage")),id_noticia);
         }
     }
 
     private void carregarNoticiasEntretenimento() throws JSONException {
         JSONObject my_obj = new JSONObject(APINewsHelper.getCategoria_entretenimento());
         JSONArray noticias = my_obj.getJSONArray("articles");
+        Integer id_noticia = db.getIDCategoriaNoticia(this.categoria_entretenimento);
 
         for(int i = 0; i < noticias.length(); i++){
             JSONObject obj_temp = noticias.getJSONObject(i);
@@ -103,13 +107,14 @@ public class CarregaNoticias {
                     obj_temp.getString("publishedAt"),
                     obj_temp.getString("title"),
                     obj_temp.getString("url"),
-                    obj_temp.getString("urlToImage")),this.categoria_entretenimento);
+                    obj_temp.getString("urlToImage")),id_noticia);
         }
     }
 
     private void carregarNoticiasGeral() throws JSONException {
         JSONObject my_obj = new JSONObject(APINewsHelper.getCategoria_geral());
         JSONArray noticias = my_obj.getJSONArray("articles");
+        Integer id_noticia = db.getIDCategoriaNoticia(this.categoria_geral);
 
         for(int i = 0; i < noticias.length(); i++){
             JSONObject obj_temp = noticias.getJSONObject(i);
@@ -119,13 +124,14 @@ public class CarregaNoticias {
                     obj_temp.getString("publishedAt"),
                     obj_temp.getString("title"),
                     obj_temp.getString("url"),
-                    obj_temp.getString("urlToImage")),this.categoria_geral);
+                    obj_temp.getString("urlToImage")),id_noticia);
         }
     }
 
     private void carregarNoticiasSaude() throws JSONException {
         JSONObject my_obj = new JSONObject(APINewsHelper.getCategoria_saude());
         JSONArray noticias = my_obj.getJSONArray("articles");
+        Integer id_noticia = db.getIDCategoriaNoticia(this.categoria_saude);
 
         for(int i = 0; i < noticias.length(); i++){
             JSONObject obj_temp = noticias.getJSONObject(i);
@@ -135,13 +141,14 @@ public class CarregaNoticias {
                     obj_temp.getString("publishedAt"),
                     obj_temp.getString("title"),
                     obj_temp.getString("url"),
-                    obj_temp.getString("urlToImage")),this.categoria_saude);
+                    obj_temp.getString("urlToImage")),id_noticia);
         }
     }
 
     private void carregarNoticiasCiencia() throws JSONException {
         JSONObject my_obj = new JSONObject(APINewsHelper.getCategoria_ciencia());
         JSONArray noticias = my_obj.getJSONArray("articles");
+        Integer id_noticia = db.getIDCategoriaNoticia(this.categoria_ciencia);
 
         for(int i = 0; i < noticias.length(); i++){
             JSONObject obj_temp = noticias.getJSONObject(i);
@@ -151,7 +158,7 @@ public class CarregaNoticias {
                     obj_temp.getString("publishedAt"),
                     obj_temp.getString("title"),
                     obj_temp.getString("url"),
-                    obj_temp.getString("urlToImage")),this.categoria_ciencia);
+                    obj_temp.getString("urlToImage")),id_noticia);
         }
     }
 
