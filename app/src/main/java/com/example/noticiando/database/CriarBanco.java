@@ -9,7 +9,7 @@ public class CriarBanco extends SQLiteOpenHelper{
     public static final String NOME_BASE_DADOS_NOTICIANDO = "noticiando.db";
 
     // Versionamento banco de dados
-    public static final int VERSAO = 19;
+    public static final int VERSAO = 22;
 
     // Dados tabela usuario
     public static final String TABELA_USUARIO = "usuario";
@@ -31,7 +31,7 @@ public class CriarBanco extends SQLiteOpenHelper{
     public static final String TITULO_NOTICIAS = "titulo_noticia";
     public static final String URL_NOTICIAS = "url_para_noticia";
     public static final String URL_TO_NOTICIAS = "url_para_imagem_noticia";
-    public static final String CATEGORIA_NOTICIAS = "categoria_noticia";
+    public static final String FK_CATEGORIA_NOTICIAS = "id_categoria_noticia";
 
     // Dados tabela categorias notícias
     public static final String TABELA_CATEGORIAS_NOTICIAS = "categorias_noticias";
@@ -60,6 +60,12 @@ public class CriarBanco extends SQLiteOpenHelper{
                 + ESCOLHA_CATEG_NOTICIA + " BOOLEAN"
                 +")";
 
+        // Criando tabela das categorias das noticias
+        String QUERY_CRIAR_TABELA_CATEGORIAS_NOTICIAS = "CREATE TABLE " + TABELA_CATEGORIAS_NOTICIAS + " ("
+                + ID_NOTICIAS + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + NOME_CATEG_NOTICIA + " TEXT UNIQUE"
+                +")";
+
         // Criando tabela das noticias
         String QUERY_CRIAR_TABELA_NOTICIAS = "CREATE TABLE " + TABELA_NOTICIAS + " ("
                 + ID_CATEG_NOTICIA + " INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -68,16 +74,11 @@ public class CriarBanco extends SQLiteOpenHelper{
                 + DESCRICAO_NOTICIAS + " TEXT,"
                 + DATA_PUBLICACAO_NOTICIAS + " DATETIME, "
                 + TITULO_NOTICIAS + " TEXT,"
-                + URL_NOTICIAS + " TEXT,"
+                + URL_NOTICIAS + " TEXT UNIQUE,"
                 + URL_TO_NOTICIAS + " TEXT, "
-                + CATEGORIA_NOTICIAS + " TEXT"
-                +")";
-
-        // Criando tabela das categorias das noticias
-        String QUERY_CRIAR_TABELA_CATEGORIAS_NOTICIAS = "CREATE TABLE " + TABELA_CATEGORIAS_NOTICIAS + " ("
-                + ID_NOTICIAS + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + NOME_CATEG_NOTICIA + " TEXT UNIQUE"
-                +")";
+                + FK_CATEGORIA_NOTICIAS + " INTEGER, "
+                + "CONSTRAINT FK_CATEG_NOTICIAS FOREIGN KEY (" + FK_CATEGORIA_NOTICIAS + ") REFERENCES " + TABELA_CATEGORIAS_NOTICIAS + "(_id)"
+                + " )";
 
         // Criando tabela da relação entre usuário e categoria da notícia
         String QUERY_CRIAR_TB_RELACAO_USUARIO_CATEG_NOTICIA = "CREATE TABLE " + TABELA_USUARIO_CATEG_NOTICIA + " ("
