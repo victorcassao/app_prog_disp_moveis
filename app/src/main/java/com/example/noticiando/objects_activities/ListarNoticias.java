@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.noticiando.R;
 import com.example.noticiando.database.BancoController;
 import com.example.noticiando.objects.Usuario;
+import com.example.noticiando.objects_fragment.FragmentListaNoticias;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class ListarNoticias extends AppCompatActivity {
 
         fragmentManager.beginTransaction()
                 .add(R.id.fragmentNoticias,fragInfos)
+                .addToBackStack(null)
                 .commit();
     }
 }
