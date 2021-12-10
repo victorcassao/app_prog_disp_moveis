@@ -1,4 +1,4 @@
-package com.example.noticiando.objects;
+package com.exampPicassole.noticiando.objects;
 
 import java.io.Serializable;
 
